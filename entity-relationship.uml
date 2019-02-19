@@ -1,0 +1,41 @@
+@startuml Entity Relationship
+
+interface User {
+    name: String
+    profileImageUrl: Url
+}
+
+User "1" --- "1" ItemList
+
+interface ItemList {
+    items: Item[]
+}
+
+ItemList "1" --{ "n" Item
+ItemList "1" --{ "n" PlaceGroup
+
+interface Item {
+    name: String
+    note: String
+    isNecessary: Boolean
+    quantity: Integer
+    linkedPlaces: Place[]
+    isDone: Boolean
+}
+
+Item "1" --{ "n" Place
+
+interface Place {
+    name: String
+    address: String
+    latitude: Float
+    longitude: Float
+}
+
+interface PlaceGroup {
+    Places: Place[]
+}
+
+PlaceGroup "1" --{ "n" Place
+
+@enduml
